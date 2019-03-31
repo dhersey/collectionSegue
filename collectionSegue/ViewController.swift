@@ -18,19 +18,14 @@ class ViewController: UICollectionViewController {
         return 10
     }
     
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        lastSelectedIndexPath = indexPath
-        return true
-    }
-    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let item = lastSelectedIndexPath {
-            segue.destination.title = "item: \(item))"
-        }
+        let cell = sender as! UICollectionViewCell
+        let indexPath = collectionView.indexPath(for: cell)!
+        segue.destination.title = "item: \(indexPath)"
     }
 }
 
